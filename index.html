@@ -42,6 +42,7 @@
             max-width: 500px;
             width: 100%;
             max-height: 65vh;
+            overflow-y: auto;
             position: absolute;
             bottom: 5vh
         }
@@ -92,26 +93,92 @@
     </div>
     
     <div class="card">
-        <h1>Date Night Games 💕</h1>
-        <p class="subtitle">Pick a game! hehehe</p>
-        
-        <div class="button-container">
-            <a href="https://mywordle.strivemath.com/?word=ovihh" class="game-button" target="_blank">
-                🔤 Custom Wordle
-            </a>
+        <div id="password-section">
+            <h2 style="color: #ff69b4; text-align: center;">Enter the secret word 🔐</h2>
+            <input 
+                type="text" 
+                id="password-input" 
+                placeholder="Type here..."
+                style="
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 8px;
+                    border: 2px solid #ffb3d9;
+                    font-size: 16px;
+                    text-align: center;
+                    margin-bottom: 15px;
+                    box-sizing: border-box;
+                "
+            >
+            <button 
+                onclick="checkPassword()"
+                style="
+                    width: 100%;
+                    padding: 12px;
+                    background: linear-gradient(135deg, #ff9ec4 0%, #ffb3d9 100%);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 18px;
+                    font-weight: bold;
+                    cursor: pointer;
+                "
+            >
+                Submit 💕
+            </button>
+        </div>
+
+        <div id="secret-note" style="display: none; text-align: center;">
+            <h2 style="color: #ff69b4;">For you 💖</h2>
+            <img src="YOUR_IMAGE_URL_HERE" style="max-width: 100%; border-radius: 12px;">
+        </div>
+
+        <div id="games-section" style="display: none;">
+            <h1>Date Night Games 💕</h1>
+            <p class="subtitle">Pick a game! hehehe</p>
             
-            <a href="YOUR_CONNECTIONS_LINK_HERE" class="game-button" target="_blank">
-                🧩 Connections
-            </a>
-            
-            <a href="https://jigsawpuzzles.io" class="game-button" target="_blank">
-                🖼️ Jigsaw Puzzles
-            </a>
-            
-            <a href="https://skribbl.io" class="game-button" target="_blank">
-                🎨 Skribbl
-            </a>
+            <div class="button-container">
+                <a href="https://mywordle.strivemath.com/?word=ovihh" class="game-button" target="_blank">
+                    🔤 Custom Wordle
+                </a>
+                
+                <a href="YOUR_CONNECTIONS_LINK_HERE" class="game-button" target="_blank">
+                    🧩 Connections
+                </a>
+                
+                <a href="https://jigsawpuzzles.io" class="game-button" target="_blank">
+                    🖼️ Jigsaw Puzzles
+                </a>
+                
+                <a href="https://skribbl.io" class="game-button" target="_blank">
+                    🎨 Skribbl
+                </a>
+            </div>
         </div>
     </div>
+
+    <script>
+    function checkPassword() {
+        const input = document.getElementById('password-input').value.toLowerCase().trim();
+        const correctPassword = 'PUT_YOUR_PASSWORD_HERE'; // ← CHANGE THIS
+        
+        if (input === correctPassword) {
+            document.getElementById('password-section').style.display = 'none';
+            document.getElementById('secret-note').style.display = 'block';
+            
+            // Games appear after 3 seconds
+            setTimeout(() => {
+                document.getElementById('games-section').style.display = 'block';
+            }, 3000);
+        } else {
+            alert('Not quite! Try again 💕');
+        }
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('password-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkPassword();
+    });
+    </script>
 </body>
 </html>
